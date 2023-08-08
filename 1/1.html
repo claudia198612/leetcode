@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            .icon {
+                top: 5px;
+              width: 1em;
+              height: 1em;
+              vertical-align: -0.15em;
+              fill: currentColor;
+              overflow: hidden;
+              position: absolute;
+              cursor: pointer;
+              right: 10px;
+            }
+            .icon_font {
+                top: 200px;
+                left: 200px;
+                height: 50px;
+                width: 100px;
+                background-color: pink;
+                position: relative;
+                border-radius: 25px
+            }
+           
+
+            .tooltiptext {
+            visibility: visible;
+            width: 120px;
+            background-color: black;
+            color: skyblue;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            }
+
+            .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+            }
+            .body {
+                position: relative;
+
+            }
+            .manu {
+                position: absolute;
+                left: 20px;
+                top: 15px;
+            }
+        </style>
+
+        <link href="css/style.css" rel="stylesheet">
+        <script src="./iconfont.js"></script>
+        
+    </head>
+    <body>
+        <div class="body">
+            <div class="icon_font">
+                <span class="tooltip">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-help"></use>
+                    </svg>
+                    <span class="tooltiptext">This is a tooltip</span>
+                  </span>
+                  <span class="manu">菜单栏</span>
+            </div>
+            <span class="tooltiptext">This is a tooltip</span>
+        </div>
+       
+
+        <script>
+
+            var tooltip = document.querySelector(".icon");
+            tooltip.addEventListener("mouseenter", function(event) {
+            var tooltiptext = this.querySelector(".tooltiptext");
+            tooltiptext.style.visibility = "visible";
+            tooltiptext.style.opacity = 1;
+            });
+
+            tooltip.addEventListener("mouseleave", function(event) {
+            var tooltiptext = this.querySelector(".tooltiptext");
+            tooltiptext.style.visibility = "hidden";
+            tooltiptext.style.opacity = 0;
+            });
+        </script>
+        
+    </body>
+</html>

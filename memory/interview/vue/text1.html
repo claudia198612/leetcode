@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/zhuye">主页</router-link>
+            <router-link to="/keji">科技</router-link>
+            <router-link to="/jinrong">金融</router-link>
+            <router-view></router-view>
+        </div>
+        
+        
+        
+        <script>
+            var zhuye = {
+                template:`
+                        <div>
+                            <h1>主页内容</h1>
+                            <router-link to="/zhuye/tab1">tab1</router-link>
+                            <router-link to="/zhuye/tab2">tab2</router-link>
+                            <router-view></router-view>
+                        </div>`
+            }
+
+            var keji = {
+                template:`<h1>科技内容</h1>`
+            }
+            var jinrong = {
+                template:`<h1>金融内容</h1>`
+            }
+            var tab1 = {
+                template:`<h1>tab1内容</h1>`
+            }
+            var tab2 = {
+                template:`<h1>tab2内容</h1>`
+            }
+
+            var myRouter = new VueRouter({
+                routes:[
+                    {path:'/zhuye',component:zhuye,children:[
+                        {path:'/zhuye/tab1',component:tab1},
+                        {path:'/zhuye/tab2',component:tab2},
+                    ] },
+                    {path:'/keji',component:zhuye},
+                    {path:'/jinrong',component:zhuye}
+                ]
+            })
+            
+
+            var vm = new Vue({
+                el: '#app',
+                
+                router:myRouter
+            });
+
+        </script>
+    
+   
+    </body>
+</html>
+
+
+

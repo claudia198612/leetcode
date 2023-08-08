@@ -1,0 +1,42 @@
+var Max_num = function(repeatArr) {
+    //寻找数组repeatArr中最大的数
+    if (!repeatArr.length) {
+        return -1;
+    }
+    var max = repeatArr[0];
+    for (let i = 0; i < repeatArr.length; i++) {
+        if (repeatArr[i] > max) {
+            max = repeatArr[i];
+        }
+
+
+    }
+    return max;
+}
+
+var Hash = function(repeatArr, Max_N) {
+    //哈希表存储数组中的数出现的次数
+    if (!repeatArr.length) {
+        console.log("数组为空")
+        return -1;
+    }
+    var HashTable = [];
+    for (let i = 0; i <= Max_N; i++) {
+        HashTable.push(0);
+
+    }
+    for (let i = 0; i < repeatArr.length; i++) {
+        HashTable[repeatArr[i]]++;
+    }
+    //寻找出现次数最多的数
+    var Repeat_num = Max_num(HashTable);
+
+    return Repeat_num;
+
+};
+//测试数据1
+var repeatArr = [1, 3, 3, 3, 4, 5, 6, 7, 8, 8, 9];
+var Max_N = Max_num(repeatArr)
+
+//打印答案
+console.log(Hash(repeatArr, Max_N));

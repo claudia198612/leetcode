@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.wxml": "html",
+        "*.wxss": "css",
+        "Users.vue": "html",
+        "ostream": "cpp"
+    }
+}

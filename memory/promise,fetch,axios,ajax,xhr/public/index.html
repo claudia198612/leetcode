@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+        fetch('http://localhost:8080/second',{
+            method:'GET'
+        }).then(function(data){
+            return data.text();
+        }).then(function(data){
+            console.log(data)
+        })
+      </script>
+</html>

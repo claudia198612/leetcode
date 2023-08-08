@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Refresh Example</title>
+    <style>
+        .order-container {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <button id="refresh-button">刷新</button>
+    <div id="orders" class="order-container"></div>
+
+    <script>
+        // 假设订单 ID 为 1-10
+        const orderIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const ordersElement = document.getElementById('orders');
+
+        async function fetchOrder(id) {
+            const response = await fetch(`/api/order/${id}`);
+            const data = await response.json();
+            return data;
+        }
+
+        async function fetchOrders() {
+            const orders = await Promise.all(orderIds.map(fetchOrder));
+            return orders;
+        }
+
+        function displayOrders(orders) {
+            ordersElement.innerHTML = '';
+            orders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.textContent = `Order ID: ${order.id}, Last Updated: ${order.updatedAt}`;
+                ordersElement.appendChild(orderElement);
+            });
+        }
+
+        async function refreshOrders() {
+            const orders = await fetchOrders();
+            orders.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+            displayOrders(orders);
+        }
+
+        // 初始化订单信息
+        refreshOrders();
+
+        // 绑定刷新按钮事件
+        const refreshButton = document.getElementById('refresh-button');
+        refreshButton.addEventListener('click', refreshOrders);
+    </script>
+</body>
+</html>
