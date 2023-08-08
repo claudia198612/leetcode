@@ -1,47 +1,101 @@
-//当传入的参数是数组类型时，在b函数中改变arr的值，竟然也会影响a函数中arr的值！！
+// 这一版本最好记忆
+class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+    
+  class LinkedList {
+    constructor() {
+      this.head = null;
+    }
+    
+    add(data) {
+      const new_node = new Node(data);
+      if (this.head === null) {
+        this.head = new_node;
+      } else {
+        let current = this.head;
+        while (current.next !== null) {
+          current = current.next;
+        }
+        current.next = new_node;
+      }
+    }
+    remove(data) {
+      if (this.head === null) {
+        return;
+      }
+  
+      if (this.head.data === data) {
+        this.head = this.head.next;
+        return;
+      }
+  
+      let current = this.head;
+      while (current.next !== null) {
+        if (current.next.data === data) {
+          current.next = current.next.next;
+          return;
+        }
+        current = current.next;
+      }
+    }
+  
+    search(data) {
+      let current = this.head;
+      while (current !== null) {
+        if (current.data === data) {
+          return true;
+        }
+        current = current.next;
+      }
+      return false;
+    }
+  // 把old_data换成new_data
+    update(old_data, new_data) {
+      let current = this.head;
+      while (current !== null) {
+        if (current.data === old_data) {
+          current.data = new_data;
+          return;
+        }
+        current = current.next;
+      }
+    }
 
+    reverse() {
+        let prev = null;
+        let current = this.head;
+        while (current !== null) {
+          const next_node = current.next;
+          current.next = prev;
+          prev = current;
+          current = next_node;
+        }
+        this.head = prev;
+      }
+  
+    toString() {
+      const values = [];
+      let current = this.head;
+      while (current !== null) {
+        values.push(String(current.data));
+        current = current.next;
+      }
+      return values.join('->');
+    }
+  }
+  
 
-function b(arr) {
-    arr = [4, 5, 6];
-
-}
-
-function a(arr) {
-    //arr刚传入进来就是4,5,6;
-
-    console.log(arr); //输出值为：4,5,6
-
-    b(arr); //经过b函数改变arr[0]=1、arr[1]=2、arr[2]=3的值
-
-    //检测a中的arr是否发生改变 -- 结论：在a函数中的arr的值也发生改变！！
-    console.log(arr); //输出值为：1,2,3.在a函数中的arr的值也发生改变！！
-
-}
-
-a([4, 5, 6]); //程序开头--调用 a 函数，传入数组[4, 5, 6]
-
-
-
-
-
-
-
-
-
-
-// //当传入参数是int类型的时候，无论在b函数中怎么改变q,w,e的值，a中的q,w,e都不变
-// function b(q, w, e) {
-//     //在b中改变q,w,e的值
-//     q = 4;
-//     w = 5;
-//     e = 6;
-// }
-
-// function a(q, w, e) {
-//     console.log("1: " + q, w, e); //未经过 b 函数改变q,w,e值 ：1,2,3
-
-//     b(q, w, e); //经过b函数改变b函数中q,w,e的值
-
-//     console.log("2: " + q, w, e); //经过 b 函数改变q,w,e值: 1,2,3（无变化，和原来一样）
-// }
-// a(1, 2, 3); //程序开头--调用 a 函数，q = 1, w = 2, e = 3;
+const linked_list = new LinkedList();
+linked_list.add(1);
+linked_list.add(2);
+linked_list.add(3);
+console.log(linked_list.toString()); // 输出 1->2->3
+linked_list.remove(2);
+console.log(linked_list.toString()); // 输出 1->3
+console.log(linked_list.search(3)); // 输出 true
+linked_list.update(3, 4);
+console.log(linked_list.toString()); // 输出 1->4
