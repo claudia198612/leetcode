@@ -1,3 +1,7 @@
+//1.为什么return await response.json();进行json解析也是异步？
+// response.json() 方法返回一个Promise，因为读取响应体并将其解析为JSON是一个异步操作。这是因为响应体可能很大，因此需要分块接收，解析过程也可能相当耗时。
+
+
 async function makeRequest(url) {
     try {
       const response = await fetch(url);
